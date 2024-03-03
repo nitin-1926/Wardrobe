@@ -1,8 +1,13 @@
-// store.ts
 import { configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
+import { userInitialState } from './modules/Profile/reducers';
 import rootReducer from './reducer';
-import rootSaga from './saga';
+import rootSaga, { ApplicationState } from './saga';
+
+// Application initial state
+export const initialState: ApplicationState = {
+	user: userInitialState,
+};
 
 const sagaMiddleware = createSagaMiddleware();
 

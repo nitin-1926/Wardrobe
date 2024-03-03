@@ -15,10 +15,11 @@ import {
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { decrement, increment } from '../../../reducer';
+import { ApplicationState } from '../../../saga';
+import { setTheme } from '../../Profile/actions';
 import { NOT_TO_BE_SELECTED_KEYS } from '../constants';
 
 const Sidebar = () => {
@@ -28,7 +29,7 @@ const Sidebar = () => {
 
 	const navigate = useNavigate();
 
-	const themeMode = 'light';
+	const themeMode = useSelector((state: ApplicationState) => state.user.preferences.theme);
 
 	const sideBarItems: MenuProps['items'] = [
 		{
@@ -105,14 +106,13 @@ const Sidebar = () => {
 				break;
 			case 'addPost':
 				console.log('addPost');
-				dispatch(decrement());
 				break;
 			case 'profile':
 				console.log('profile');
-				dispatch(increment());
 				break;
 			case 'theme':
 				console.log('Theme');
+				dispatch(setTheme({ theme: themeMode === 'light' ? 'dark' : 'light' }));
 				break;
 			case 'settings':
 				console.log('settings');

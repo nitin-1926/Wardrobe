@@ -1,16 +1,13 @@
 // sagas.ts
-import { takeEvery, put } from 'redux-saga/effects';
-import { increment, decrement } from './reducer';
+import { all, fork } from 'redux-saga/effects';
+import { IUser } from './modules/Profile/types';
+// import userSaga from './modules/Profile/saga';
 
-function* incrementAsync() {
-	yield put(increment());
-}
-
-function* decrementAsync() {
-	yield put(decrement());
-}
+// Redux state of the application
+export type ApplicationState = {
+	user: IUser;
+};
 
 export default function* rootSaga() {
-	yield takeEvery('INCREMENT_ASYNC', incrementAsync);
-	yield takeEvery('DECREMENT_ASYNC', decrementAsync);
+	// yield all([fork(userSaga)]);
 }
