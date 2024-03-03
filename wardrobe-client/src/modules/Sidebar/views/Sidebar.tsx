@@ -15,12 +15,16 @@ import {
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { decrement, increment } from '../../../reducer';
 import { NOT_TO_BE_SELECTED_KEYS } from '../constants';
 
 const Sidebar = () => {
 	const [selectedKeys, setSelectedKeys] = React.useState<string[]>([]);
+
+	const dispatch = useDispatch();
 
 	const navigate = useNavigate();
 
@@ -101,9 +105,11 @@ const Sidebar = () => {
 				break;
 			case 'addPost':
 				console.log('addPost');
+				dispatch(decrement());
 				break;
 			case 'profile':
 				console.log('profile');
+				dispatch(increment());
 				break;
 			case 'theme':
 				console.log('Theme');
